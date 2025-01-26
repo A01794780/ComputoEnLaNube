@@ -7,10 +7,17 @@
     #include <omp.h>
 #endif // _OPENMP
 
-#define N 1000 // Cantidad de elementos a manejar
+#define N 1500 // Cantidad de elementos a manejar
 #define chunk  10 // Tamaño que tienen los pedazos de los arreglos para cada hilo
-#define mostrar 10// Cantidad de datos a imprimir
+#define mostrar 15// Cantidad de datos a imprimir
 
+/// <summary>
+/// Llena los arreglos a y b que se sumaran haciendo uso de un valor pasado como parametro
+/// </summary>
+/// <param name="a">Arreglo a llenar</param>
+/// <param name="b">Arreglo a llenar</param>
+/// <param name="valor">Valor que se usara para generar valores para llenar los arreglos a y b</param>
+void llenarArreglos(float* a, float* b, float valor);
 void imprimeArreglo(float* d);
 
 int main()
@@ -19,13 +26,9 @@ int main()
     float a[N], b[N], c[N];
     int i;
 
-    for (i = 0; i < N; i++)
-    {
-        a[i] = i * 5;
-        b[i] = (i + 10) * 5.5;
-    }
-    int pedazos = chunk;
+    llenarArreglos(a, b, 10);
 
+    int pedazos = chunk;
     #pragma omp parallel for \
     shared(a, b, c, pedazos) private (i) \
     schedule(static, pedazos)
@@ -39,6 +42,15 @@ int main()
     imprimeArreglo(b);
     std::cout << "Impimiendo los primero " << mostrar << " valores del arreglo c: " << std::endl;
     imprimeArreglo(c);
+}
+
+void llenarArreglos(float* a, float* b, float valor)
+{
+    for (int i = 0; i < N; i++)
+    {
+        a[i] = i * valor;
+        b[i] = (i + valor*2) * (valor/2);
+    }
 }
 
 void imprimeArreglo(float* d)
