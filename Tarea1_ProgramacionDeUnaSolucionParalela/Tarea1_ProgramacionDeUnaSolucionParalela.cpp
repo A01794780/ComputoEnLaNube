@@ -33,11 +33,11 @@ int main()
     for (i = 0; i < N; i++)
         c[i] = a[i] + b[i];
 
-    std::cout << "Impimiendo los primero " << mostrar << " calores del arreglo a: " << std::endl;
+    std::cout << "Impimiendo los primero " << mostrar << " valores del arreglo a: " << std::endl;
     imprimeArreglo(a);
-    std::cout << "Impimiendo los primero " << mostrar << " calores del arreglo b: " << std::endl;
+    std::cout << "Impimiendo los primero " << mostrar << " valores del arreglo b: " << std::endl;
     imprimeArreglo(b);
-    std::cout << "Impimiendo los primero " << mostrar << " calores del arreglo c: " << std::endl;
+    std::cout << "Impimiendo los primero " << mostrar << " valores del arreglo c: " << std::endl;
     imprimeArreglo(c);
 }
 
